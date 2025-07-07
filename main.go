@@ -5,6 +5,7 @@ import (
 )
 
 func main() {
+    todoList()
 	name:= "Toàn"
 	age:= 23
 	hobby:= "học Go  mỗi sáng"
@@ -70,11 +71,52 @@ func main() {
 	}
 
 	//đếm tăng
-	for i := count;  i >= 1; i-- {
-		for j:= 1; j <= i; j++ {
-			fmt.Printf("%d ", j)
+	// for i := count;  i >= 1; i-- {
+	// 	for j:= 1; j <= i; j++ {
+	// 		fmt.Printf("%d ", j)
+	// 	}
+	// fmt.Println()
+
+
+	//Struct -- kiểu dữ liệu tự định nghĩa
+
+	type User struct {
+		Name string
+		Age int
+	}
+
+	u := User{Name:"Tường", Age: 23}
+
+	fmt.Printf("🫂 người dùng: %s (%d tuổi)\n", u.Name, u.Age)
+
+
+	// làm quen với kiểu dữ liệu khai bảo mảng trong go
+
+	type Task struct {
+       Title string
+	   Done bool
+	}
+
+	tasks:= []Task{
+		{Title: "Học go", Done: false},
+	    {Title: "Học go", Done: true},
+	}
+    for _, task := range tasks {
+	    fmt.Printf("📌 Việc: %s | Trạng thái: ", task.Title)
+		if task.Done {
+			fmt.Println("🎉 Đã hoàn thành")
+		}else {
+			fmt.Println("🕧 Chưa hoàn thành")
 		}
-	fmt.Println()
+	}
+
+	// check(duyet mảng) dựa theo key và value
+
+	roles:= map[string]string {
+		"admin": "Quản trị viên",
+		"use": "Người dùng",
+	}
+	fmt.Println("👑 vai trò", roles["admin"])
 }
-}
+
 
