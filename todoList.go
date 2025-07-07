@@ -33,7 +33,14 @@ func todoList() {   // 🚪 Hàm khởi động ứng dụng Todo List
 		// trong go nó cho phép chúng ta trả về nhiều giá trị
 		//ví dụ ở dưới đây choiceStr, err := reader.ReadString('n') ==> trả về 2 giá trị: 1 là choiceStr, 2 là err
 		//còn khai báo _ ở dưới để bỏ qua giá trị lỗi
-		// tại sao dùng choiceStr, _ := reader.ReadString('\n')   mà không dùng   choiceStr:= reader.ReadString('\n') ==> reader.ReadString('\n') trả về 2 giá trị         
+		// tại sao dùng choiceStr, _ := reader.ReadString('\n')   mà không dùng   choiceStr:= reader.ReadString('\n') ==> reader.ReadString('\n') trả về 2 giá trị    
+		
+		//==========================================Xử lí lỗi with go===========================================================
+		// value, err := someFunc()
+		//if err != nil {
+        //fmt.Println("❌ Có lỗi xảy ra:", err)
+        //return // hoặc xử lý theo ý bạn
+         //}
 
         choiceStr, _ := reader.ReadString('\n')          // Nhập chuỗi
         choiceStr = strings.TrimSpace(choiceStr)         // Cắt bỏ dấu xuống dòng
