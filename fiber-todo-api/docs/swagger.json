@@ -1,9 +1,85 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "REST API sử dụng Fiber và Swagger",
+        "title": "Fiber Todo API",
+        "contact": {},
+        "version": "1.0"
     },
+    "host": "localhost:3000",
+    "basePath": "/",
     "paths": {
+        "/Tasks/{id}": {
+            "get": {
+                "description": "Trả về một task duy nhất dựa trên ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID của task",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Task"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID của task",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Task"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/tasks": {
             "get": {
                 "description": "Trả về danh sách task hiện có",
@@ -65,9 +141,70 @@
                     }
                 }
             }
+        },
+        "/tasks/{id}": {
+            "put": {
+                "description": "Nhận JSON và cập nhật nội dung task",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "Cập nhật công việc theo ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID của task",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Task cần cập nhật",
+                        "name": "task",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Task"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Task"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "models.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Task": {
             "type": "object",
             "properties": {
