@@ -18,12 +18,29 @@ import (
 // c.FormFile("file")	Họ đính kèm một tấm ảnh trong thư
 // c.JSON(...)	Gửi lại cho họ một lá thư phản hồi (trả kết quả)
 
+// GetAllTasks godoc
+// @Summary Lấy danh sách tất cả công việc
+// @Description Trả về danh sách task hiện có
+// @Tags tasks
+// @Produce json
+// @Success 200 {array} models.Task
+// @Router /tasks [get]
 func GetAllTasks(c *fiber.Ctx) error {
   var tasks []models.Task
   database.DB.Find(&tasks)
   return c.JSON(tasks)
 }
 
+// CreateTask godoc
+// @Summary Tạo công việc mới
+// @Description Tạo task mới với JSON
+// @Tags tasks
+// @Accept json
+// @Produce json
+// @Param task body models.Task true "Task"
+// @Success 201 {object} models.Task
+// @Failure 400 {object} map[string]interface{}
+// @Router /tasks [post]
 func CreateTask(c *fiber.Ctx) error {
 	var task models.Task
 	if err:= c.BodyParser(&task); err != nil {
